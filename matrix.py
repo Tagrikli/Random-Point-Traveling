@@ -23,7 +23,7 @@ class Matrix:
         self.display_size = display_size
         self.ratio = self.display_size[0] /self.matrix_size[0]
         self.matrix = np.zeros((*matrix_size[::-1],3))
-        self.blur_kernel = np.array([0.2495,0.50,0.2495])
+        self.blur_kernel = np.array([0.2499,0.50,0.2499])
 
         self.weight_scale = 40
 
