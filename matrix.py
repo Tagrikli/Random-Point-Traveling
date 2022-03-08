@@ -2,7 +2,7 @@ from cgi import print_arguments
 from pygame import draw,Color
 import numpy as np
 import bezier
-
+from scipy.signal import convolve2d
 from curver import Curver
 
 
@@ -26,6 +26,7 @@ class Matrix:
         self.ratio = self.display_size[0] /self.matrix_size[0]
         self.matrix = np.zeros((*matrix_size[::-1],3))
         self.blur_kernel = np.array([0.2495,0.50,0.2495])
+
         self.weight_scale = 40
 
         self.cursor_count = cursor_count
@@ -61,6 +62,8 @@ class Matrix:
         self.matrix= np.apply_along_axis(lambda x: np.convolve(x, self.blur_kernel, mode='same'), 0, self.matrix)
         self.matrix= np.apply_along_axis(lambda x: np.convolve(x, self.blur_kernel, mode='same'), 1, self.matrix)
         self.matrix.clip(0,1)
+
+
 
     def draw(self,surface):
         for ri,row in enumerate(self.matrix):
