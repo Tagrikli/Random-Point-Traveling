@@ -1,9 +1,7 @@
 from cgi import print_arguments
 from pygame import draw,Color
 import numpy as np
-import bezier
 from scipy.signal import convolve2d
-from curver import Curver
 
 
 
@@ -33,16 +31,7 @@ class Matrix:
         self.cursor_colors = [[0.6,0.3,0.9],[0.8,0.7,0.4],[0,0,0],*[np.random.random(3) for _ in range(max(0,cursor_count-3))]]
         self.cursor_positions:list[list[int]] = [[int(self.display_size[0]*1/4),int(self.display_size[1]/4)] for _ in range(cursor_count)]
 
-        self.cursor_curvers = [Curver() for _ in range(cursor_count)]
 
-
-
-    def crisis(self):
-        poses = []
-        for curver in self.cursor_curvers:
-            p = [curver.next_point()[0] * self.display_size[0],curver.next_point()[1] * self.display_size[1]]
-            poses.append(p)    
-        self.cursor_go(poses)
 
     def cursor_go(self,pos):
         for index,cursor_position in enumerate(self.cursor_positions):
